@@ -67,7 +67,6 @@ export class EditUsuarioComponent implements OnInit{
   
   goToListUsers(){
     this.router.navigate(['/home']);
-    
   }
 
   

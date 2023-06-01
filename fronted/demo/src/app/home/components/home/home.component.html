@@ -21,7 +21,7 @@
       <td>{{u.email}}</td>
       <td>
         <button [routerLink]="['/edit-usuario', u.id]"  type="button" class="btn btn-primary" >Update</button>      
-        <button (click)="deleteUsuario(u.id)"  class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+        <button (click)="deleteUsuario(u.id)" type="button"  class="btn btn-danger" style="margin-left: 10px;">Delete</button>
       </td>
 
   </tbody>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Usuario;
+import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.services.UsuarioServices;
 
 import javax.validation.Valid;
@@ -24,6 +25,9 @@ public class UsuarioController {
 
   @Autowired
   private UsuarioServices usuarioServices;
+
+  @Autowired
+  private UsuarioRepository ur;
 
   @GetMapping
   private List<Usuario> getAllUsers() {
@@ -46,18 +50,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioServices.updateUsuario(usuario , id));
     
   }
-/* 
-   @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Integer id) {
-      usuarioServices.deleteUsuario(id);
-        return ResponseEntity.noContent().build();
-    }  */
-/* 
-      @PutMapping("/delete/{id}")
-    public ResponseEntity<Usuario> deleteUsuario(@Valid @RequestBody Usuario usuario,  @PathVariable Integer id) {
-        usuarioServices.deleteUsuarioById(usuario, id);
-        return ResponseEntity.ok().build();
-    } 
-    */
-     
+
+    @PutMapping("/delete/{id}")
+    public ResponseEntity<?> setEstadoNull( @Valid @PathVariable Integer id) {
+      usuarioServices.setEstadoNull(id);
+        return ResponseEntity.ok("Estado actualizado a null para el usuario con ID: " + id);
+    }
+
 }

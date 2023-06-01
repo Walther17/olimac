@@ -72,21 +72,13 @@ public class UsuarioImplementation implements UsuarioServices {
         }    
     }
 
-   /*  @Override
-    public void deleteUsuarioById(Usuario usuario, Integer id) {
-        Optional<Usuario> userSelect = usuarioRepository.findById(id);
+    @Override
+    public void setEstadoNull(Integer id) {
+        usuarioRepository.setEstadoNull(id);
+    }
 
-        if (userSelect != null) {
-            Usuario userUpdate = userSelect.get();
-            userUpdate.setEstado(null);
-            saveUsuario(usuario);
-
-            throw new ResponseStatusException(HttpStatus.OK, "Eliminado Exitosamente");
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "No se encontró el usuario con el ID especificado: " + id);
-        }
-        
-    } */
+  
+   
+   
    
 }

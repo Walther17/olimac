@@ -1,7 +1,11 @@
 package com.example.demo.services;
 
 import java.util.List;
+
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.demo.model.Usuario;
 
 public interface UsuarioServices {
@@ -20,7 +24,11 @@ public interface UsuarioServices {
 
     public void deleteUsuario(Integer id);
 
-    //public void deleteUsuarioById(Usuario usuario, Integer id);
+    @Transactional
+    @Modifying
+    @Query("UPDATE Usuario u SET u.estado = null WHERE u.id = ?1  ")
+    public void setEstadoNull( Integer id);
+
 
     
 }

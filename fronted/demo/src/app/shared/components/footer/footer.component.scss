@@ -100,9 +100,12 @@ h2 {
 	background: #7c8490;  
 	}  
 	footer {  
-	 background: rgb(9, 95, 234);  
+	 background: #272929;  
 	  color: white;  
-	  margin-top:100px;  
+	  width: 100%;
+	  padding: 1em;
+	  align-self: flex-end;
+	  padding-top: 40px;
 	}  
 	footer a {  
 	  color: #fff;  
@@ -110,17 +113,14 @@ h2 {
 	  transition-duration: 0.2s;  
 	}  
 	footer a:hover {  
-	  color: #FA944B;  
+	  color: #fff;  
 	  text-decoration: none;  
 	}  
 	.copy {  
 	  font-size: 12px;  
 	  padding: 10px;  
 	  border-top: 1px solid #FFFFFF;  
-	}  
-	.footer-middle {  
-	  padding-top: 2em;  
-	  color: white;  
+
 	}  
 	ul.social-network {  
 	  list-style: none;  

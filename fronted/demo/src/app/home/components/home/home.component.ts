@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/core/models/usuario.model';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
+import {Subject, Subscription} from 'rxjs'
+import { tap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,16 @@ export class HomeComponent implements OnInit {
 
   form: FormGroup;
   
+  deleteUser: Usuario = {
+    id: 0,
+    nombre: '',
+    apellido: '',
+    usuario: '',
+    email: '',
+    estado: '',
+    password: '',
+  }
+
   newUsuario: Usuario = {
     id: 0,
     nombre: '',
@@ -25,8 +37,9 @@ export class HomeComponent implements OnInit {
     email: '',
     estado: '',
     password: '',
-  };
-  
+  }
+
+  subscripcion:Subscription;
   constructor(
     private usuarioService: UsuarioService, 
     private router: Router, 
@@ -38,11 +51,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getAllUsuarios();
+    this.subscripcion = this.usuarioService.refresh$.subscribe(() => {
+      this.getAllUsuarios();
+    })
    
   }
 
 
-   getAllUsuarios(){
+
+   getAllUsuarios():void{
     this.usuarioService.getAllUsuarios().subscribe(dato =>{
       this.usuarios = dato;
       console.log(dato)
@@ -56,14 +73,14 @@ export class HomeComponent implements OnInit {
   }
   
    deleteUsuario(id:number){
-    this.usuarioService.deleteUsuario(id, this.newUsuario).subscribe(dato=>{
-      console.log(dato);
+    this.usuarioService.deleteUsuario(id, this.deleteUser).subscribe(dato=>
+      {
+      console.log(dato)
       this.getAllUsuarios();
     })
   }
 
 
-  
   onSubmitCreateNewUser() {
     this.createUser();
   }
