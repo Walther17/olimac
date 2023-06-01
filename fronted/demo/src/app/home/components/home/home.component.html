@@ -1,0 +1,205 @@
+
+<p>List of Users</p>
+<button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalNew" >New</button>      
+
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Actions</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let u of usuarios">
+      <td>{{u.nombre}}</td>
+      <td>{{u.apellido}}</td>
+      <td>{{u.email}}</td>
+      <td>
+        <button [routerLink]="['/edit-usuario', u.id]"  type="button" class="btn btn-primary" >Update</button>      
+        <button (click)="deleteUsuario(u.id)"  class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+      </td>
+
+  </tbody>
+</table>
+
+
+<!-- Modal para actualizar usuarios -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">sdkljsdfhksdfh</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitUpdateUser()">
+
+
+          <div class="form-outline mb-4">
+            <input  class="form-control form-control-lg" name="Unombre" id="Unombre"  type="text"/>
+            <label class="form-label" for="form2Example17">Nombres</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" class="form-control form-control-lg" name="Uapellido" id="Uapellido" />
+            <label class="form-label" for="form2Example17">Apellidos</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email"  class="form-control form-control-lg" name="Uusuario" id="Uusuario"/>
+            <label class="form-label" for="form2Example17">Nombre de usuario</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email" class="form-control form-control-lg" name="Uemail" id="Uemail" />
+            <label class="form-label" for="form2Example17">Email address</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="password"   class="form-control form-control-lg"  name="Ucontrasena" id="Ucontrasena"/>
+            <label class="form-label" for="form2Example27">Password</label>
+          </div>
+
+          
+          <div class="form-outline mb-4">
+            <input  class="form-control form-control-lg"   type="text" name="Uestado" id="Uestado"/>
+            <label class="form-label" for="form2Example17">Estado</label>
+          </div>
+
+          <div class="pt-1 mb-4">
+            <button class="btn btn-dark btn-lg btn-block" type="submit" (click)="onSubmitUpdateUser()"  type="button">UPDATE</button>
+          </div>
+
+      
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- Modal para un nuevo usuario -->
+<div class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="createUser()">
+
+
+          <div class="form-outline mb-4">
+            <input  class="form-control form-control-lg" id="Nnombre" name="Nnombre"  [(ngModel)]="newUsuario.nombre"  type="text"/>
+            <label class="form-label" for="form2Example17">Nombres</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="Napellido" name="Napellido" [(ngModel)]="newUsuario.apellido"  class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example17">Apellidos</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email" id="Nusuario" name="Nusuario" [(ngModel)]="newUsuario.usuario"  class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example17">Nombre de usuario</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email" id="Nemail"  name="Nemail" [(ngModel)]="newUsuario.email"  class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example17">Email address</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="password" id="Ncontrasena" name="Ncontrasena" [(ngModel)]="newUsuario.password" class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example27">Password</label>
+          </div>
+
+          
+          <div class="form-outline mb-4">
+            <input  class="form-control form-control-lg" id="Nestado" name="Nestado" [(ngModel)]="newUsuario.estado"   type="text"/>
+            <label class="form-label" for="form2Example17">Estado</label>
+          </div>
+
+          <div class="pt-1 mb-4">
+            <button class="btn btn-dark btn-lg btn-block" type="submit"  type="submit">Create</button>
+          </div>
+
+      
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- <div class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="createUser($event)">
+
+
+          <div class="form-outline mb-4">
+            <input  class="form-control form-control-lg" id="nombre" name="nombre" formControlName="nombre" type="text"/>
+            <label class="form-label" for="form2Example17">Nombres</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="apellido" name="apellido" formControlName="apellido"  class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example17">Apellidos</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email" id="usuario" name="usuario" formControlName="usuario"  class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example17">Nombre de usuario</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="email" id="email"  name="email" formControlName="email"  class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example17">Email address</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="password" id="password" name="password" formControlName="password" class="form-control form-control-lg" />
+            <label class="form-label" for="form2Example27">Password</label>
+          </div>
+
+          
+          <div class="form-group" >
+            <label for="exampleFormControlSelect1">Estado</label>
+            <select formControlName="estado" class="form-control" id="exampleFormControlSelect">
+              <option>A</option>
+              <option>I</option>
+            </select>
+          </div>
+
+          <div class="pt-1 mb-4">
+            <button class="btn btn-dark btn-lg btn-block" type="submit"  type="submit">Create</button>
+          </div>
+
+      
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div> -->
