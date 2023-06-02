@@ -22,4 +22,8 @@ public class Rol {
 
  
 
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private Usuario user;
+
 }

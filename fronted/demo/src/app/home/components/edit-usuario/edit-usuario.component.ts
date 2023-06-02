@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
+import { Rol } from 'src/app/core/models/rol.model';
+import { Usuario } from 'src/app/core/models/usuario.model';
 
 @Component({
   selector: 'app-edit-usuario',
@@ -11,9 +13,13 @@ import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 export class EditUsuarioComponent implements OnInit{
 
 
+  usuarios : Usuario[]
+
   id: number;
 
   form: FormGroup;
+
+  roles: Rol[];
 
   
   
@@ -37,6 +43,8 @@ export class EditUsuarioComponent implements OnInit{
       },error => console.log(error)); 
     });
     
+    this.getAllRoles()
+    
    
   }
 
@@ -46,8 +54,8 @@ export class EditUsuarioComponent implements OnInit{
       const usuario = this.form.value;
       this.usuarioService.updateUsuario(this.id, usuario).subscribe(dato => {
         console.log(dato)
+        this.goToListUsers();
       },error => console.log(error));  
-      this.goToListUsers();
     }
     
   }
@@ -55,7 +63,7 @@ export class EditUsuarioComponent implements OnInit{
   private buildForm() {
     this.form = this.formBuilder.group({
     
-      nombre: ['', [Validators.required]],
+      nombre: ['', [Validators.required, ]],
       apellido: ['', [Validators.required, Validators.minLength(4), ]],
       estado: ['', [Validators.required]],
       email: ['', [Validators.required]],
@@ -63,6 +71,14 @@ export class EditUsuarioComponent implements OnInit{
       usuario: ['', [Validators.required]],
     });
   }
+
+  getAllRoles(): void {
+    this.usuarioService.getAllRoles().subscribe(dato => {
+      this.roles= dato;
+      console.log(dato)
+    });
+  }
+
 
   
   goToListUsers(){

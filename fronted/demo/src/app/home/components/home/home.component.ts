@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { BehaviorSubject } from 'rxjs';
+import { Rol } from 'src/app/core/models/rol.model';
+
 declare var $  : any;
 
 @Component({
@@ -19,6 +21,8 @@ export class HomeComponent implements OnInit {
   usuarios$: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([]);
 
   usuarios: Usuario[] ;
+
+  roles: Rol[];
 
   id: number;
 
@@ -51,7 +55,12 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-  ) { }
+  ) { 
+    this.getAllRoles()
+    this.buildForm();
+
+
+  }
 
 
   ngOnInit() {
@@ -61,6 +70,14 @@ export class HomeComponent implements OnInit {
     })
 
   }
+
+  getAllRoles(): void {
+    this.usuarioService.getAllRoles().subscribe(dato => {
+      this.roles= dato;
+      console.log(this.roles)
+    });
+  }
+
 
 
 
@@ -91,6 +108,29 @@ export class HomeComponent implements OnInit {
     });
 
   
+  }
+
+  createUser2(event: Event) {
+    event.preventDefault();
+    if (this.form.valid) {
+      const user = this.form.value;
+      this.usuarioService.createUsuario(user).subscribe(user => {
+        console.log('This is the user: ', user);
+      });
+    }
+
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required,]],
+      estado: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      usuario: ['', [Validators.required]],
+    });
   }
 
 

@@ -91,7 +91,7 @@
 
 
 <!-- Modal para un nuevo usuario -->
-<div  class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div  class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -127,10 +127,20 @@
             <label class="form-label" for="form2Example27">Password</label>
           </div>
 
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Rol</label>
+            <select  class="form-control" id="Nrol" name="Nrol">
+              <option *ngFor="let r of roles" [value]="r.id">{{ r.rol }}</option>
+            </select>
+          </div>
           
-          <div class="form-outline mb-4">
-            <input  class="form-control form-control-lg" id="Nestado" name="Nestado" [(ngModel)]="newUsuario.estado"   type="text"/>
-            <label class="form-label" for="form2Example17">Estado</label>
+
+          <div class="form-group" >
+            <label for="exampleFormControlSelect1">Estado</label>
+            <select [(ngModel)]="newUsuario.estado"  id="Nestado" name="Nestado" class="form-control" >
+              <option>A</option>
+              <option>I</option>
+            </select>
           </div>
 
           <div class="pt-1 mb-4">
@@ -144,16 +154,16 @@
     
     </div>
   </div>
-</div> 
+</div>  -->
 
-<!-- <div class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="exampleModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="createUser($event)">
+        <form (ngSubmit)="createUser2($event)">
 
 
           <div class="form-outline mb-4">
@@ -181,10 +191,17 @@
             <label class="form-label" for="form2Example27">Password</label>
           </div>
 
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Rol</label>
+            <select  class="form-control" id="Nrol" name="Nrol">
+              <option *ngFor="let r of roles" [value]="r.id">{{ r.rol }}</option>
+            </select>
+          </div>
           
+
           <div class="form-group" >
             <label for="exampleFormControlSelect1">Estado</label>
-            <select formControlName="estado" class="form-control" id="exampleFormControlSelect">
+            <select [(ngModel)]="newUsuario.estado"  id="Nestado" name="Nestado" class="form-control" >
               <option>A</option>
               <option>I</option>
             </select>
@@ -200,4 +217,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div> 

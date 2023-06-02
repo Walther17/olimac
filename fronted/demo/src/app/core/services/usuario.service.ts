@@ -5,6 +5,7 @@ import { Usuario } from '../models/usuario.model';
 import {environment} from '../../../environments/environments'
 import {Subject} from 'rxjs'
 import { tap } from 'rxjs/operators'
+import { Rol } from '../models/rol.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,11 @@ export class UsuarioService {
     return this.httpClient.get<Usuario[]>(environment.url_api);
   }
 
+   
+  getAllRoles(): Observable<Rol[]> {
+    return this.httpClient.get<Rol[]>(environment.url_roles);
+  }
+
   createUsuario(usuario:Usuario): Observable<Object>{
     return this.httpClient.post(`${environment.url_api}`, usuario);
   }
@@ -47,5 +53,8 @@ export class UsuarioService {
   updateUsuario(id:number,  usuario:Usuario): Observable<Object>{
     return  this.httpClient.put(`${environment.url_api}/${id}`, usuario);
   }
+
+ 
+
   
 }
