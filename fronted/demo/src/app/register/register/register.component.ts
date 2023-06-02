@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../../core/models/usuario.model';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -20,31 +21,47 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  form: FormGroup;
+
+  constructor(private usuarioService: UsuarioService, 
+    private router: Router,
+    private formBuilder: FormBuilder,) {
+      this.buildForm()
+    }
 
   ngOnInit() {
   }
 
-   createUser(){
-   
-    this.usuarioService.createUsuario(this.usuario).subscribe(user=>{
-      /* next: (res)  => console.log(res),
-      error: (error) => console.log(error),
-      complete: () => console.log("completed"), */
-      console.log('This is the user: ', user);
+   createUser(event: Event){
+   event?.preventDefault();
+   if (this.form.valid) {
+    const user = this.form.value;
+    this.usuarioService.createUsuario(user).subscribe((newPromesa)=>{
+      console.log('This is the user: ', newPromesa);
+      this.goToListUsuarios();
 
     });
-    this.goToListUsuarios();
+   }
+   
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+    
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required, Validators.minLength(4), ]],
+      estado: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      usuario: ['', [Validators.required]],
+    });
   }
 
   
   goToListUsuarios() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 
-  onSubmit() {
-    this.createUser();
-    console.log(this.usuario);
-  }
+
 
 }

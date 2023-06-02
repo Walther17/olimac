@@ -16,7 +16,10 @@ import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.services.UsuarioServices;
 
 import javax.validation.Valid;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -46,15 +49,19 @@ public class UsuarioController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Usuario> updateUsuario(@Valid @RequestBody Usuario usuario,  @PathVariable Integer id) {
-        return ResponseEntity.ok(usuarioServices.updateUsuario(usuario , id));
-    
+  public ResponseEntity<Usuario> updateUsuario(@Valid @RequestBody Usuario usuario, @PathVariable Integer id) {
+    return ResponseEntity.ok(usuarioServices.updateUsuario(usuario, id));
   }
 
-    @PutMapping("/delete/{id}")
-    public ResponseEntity<?> setEstadoNull( @Valid @PathVariable Integer id) {
-      usuarioServices.setEstadoNull(id);
-        return ResponseEntity.ok("Estado actualizado a null para el usuario con ID: " + id);
-    }
+  @PutMapping("/delete/{id}")
+  public ResponseEntity<?> setEstadoNull(@Valid @PathVariable Integer id) {
+    usuarioServices.setEstadoNull(id);
+    Map<String, Object> response = new HashMap<>(); //(Map) para construye el objeto JSON de respuesta. 
+
+    response.put("success", true);
+    response.put("message", "Estado actualizado a null para el usuario con ID: " + id);
+
+    return ResponseEntity.ok(response); //  devuelve una respuesta exitosa con el objeto JSON construido.
+  }
 
 }

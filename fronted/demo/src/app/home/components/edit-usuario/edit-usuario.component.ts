@@ -56,7 +56,7 @@ export class EditUsuarioComponent implements OnInit{
     this.form = this.formBuilder.group({
     
       nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required,]],
+      apellido: ['', [Validators.required, Validators.minLength(4), ]],
       estado: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],

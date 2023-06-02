@@ -31,7 +31,7 @@ export class UsuarioService {
     return this.httpClient.post(`${environment.url_api}`, usuario);
   }
 
-  deleteUsuario(id:number,  usuario:Usuario  ): Observable<any>{
+  deleteUsuario(id:number,  usuario:Usuario  ): Observable<Object>{
     return  this.httpClient.put(`${environment.url_api_delete}/${id}`, usuario)
     .pipe(
       tap( () => {

@@ -74,7 +74,12 @@ public class UsuarioImplementation implements UsuarioServices {
 
     @Override
     public void setEstadoNull(Integer id) {
-        usuarioRepository.setEstadoNull(id);
+
+        
+
+            usuarioRepository.setEstadoNull(id);
+
+        
     }
 
   

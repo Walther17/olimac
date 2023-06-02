@@ -7,6 +7,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, SharedModule, HttpClientModule, FormsModule,  ReactiveFormsModule,
+    AppRoutingModule, SharedModule, HttpClientModule, FormsModule,  ReactiveFormsModule, NgToastModule,
   ],
   exports:[
   

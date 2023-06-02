@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/core/models/usuario.model';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { BehaviorSubject } from 'rxjs';
+declare var $  : any;
 
 @Component({
   selector: 'app-home',
@@ -66,6 +67,7 @@ export class HomeComponent implements OnInit {
   getAllUsuarios(): void {
     this.usuarioService.getAllUsuarios().subscribe(dato => {
       this.usuarios = dato;
+      this.usuarios = dato.filter((usuario) => usuario.estado === 'A');
       console.log(dato)
     });
   }
@@ -74,33 +76,21 @@ export class HomeComponent implements OnInit {
 
     this.usuarioService.createUsuario(this.newUsuario).subscribe(user => {
       this.usuarios.push(user as Usuario); // Agrego el nuevo usuario a la lista
+      $("#exampleModalNew").modal('hide');
       console.log('This is the user: ', user);
     });
   }
 
   deleteUsuario(id: number) {
-   /*  this.usuarioService.deleteUsuario(id, this.deleteUser).subscribe(dato => {
-      const index = this.usuarios.findIndex(usuario => usuario.id === id);
-      if (index !== -1) {
-        this.usuarios.splice(index, 1);
-      }
-    })  */
+ 
 
-    this.usuarioService.deleteUsuario(id, this.deleteUser).subscribe(() => {
-      const index = this.usuarios.findIndex(usuario => usuario.id === id);
-      if (index !== -1) {
-        this.usuarios.splice(index, 1);
-      }
+    this.usuarioService.deleteUsuario(id, this.deleteUser).subscribe((dato) => {
+      console.log(dato)
+      this.getAllUsuarios()
+     
     });
 
-    /* this.usuarioService.deleteUsuario(id, this.deleteUser).subscribe(dato => {
-      const index = this.usuarios$.value.findIndex(usuario => usuario.id === id);
-      if (index !== -1) {
-        const newUsuarios = [...this.usuarios$.value];
-        newUsuarios.splice(index, 1);
-        this.usuarios$.next(newUsuarios);
-      }
-    }); */
+  
   }
 
 
@@ -108,6 +98,8 @@ export class HomeComponent implements OnInit {
     this.createUser();
   }
 
+
+  // INSTALAR ICONS DE BOOSTRAPS
 
   /*
    usuarios: Usuario[];
