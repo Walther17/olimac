@@ -36,17 +36,13 @@ export class HomeComponent implements OnInit {
     email: '',
     estado: '',
     password: '',
+    rol: 
+      {
+        id: 0,
+        rol: '',
+    }
   }
 
-  newUsuario: Usuario = {
-    id: 0,
-    nombre: '',
-    apellido: '',
-    usuario: '',
-    email: '',
-    estado: '',
-    password: '',
-  }
 
   subscripcion: Subscription;
   constructor(
@@ -92,15 +88,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  createUser() {
-
-    this.usuarioService.createUsuario(this.newUsuario).subscribe(user => {
-      this.usuarios.push(user as Usuario); // Agrego el nuevo usuario a la lista
-      $("#exampleModalNew").modal('hide');
-      console.log('This is the user: ', user);
-    });
-  }
-
   deleteUsuario(id: number) {
  
 
@@ -118,6 +105,7 @@ export class HomeComponent implements OnInit {
     if (this.form.valid) {
       const user = this.form.value;
       this.usuarioService.createUsuario(user).subscribe((newUser) => {
+        this.usuarios.push(user as Usuario); 
         $("#exampleModalNew").modal('hide');
         console.log('This is the user: ', newUser);
       });
@@ -134,15 +122,12 @@ export class HomeComponent implements OnInit {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       usuario: ['', [Validators.required]],
-      roles:['', [Validators.required]]
+      rol:['', [Validators.required]]
     });
   }
 
 
-  onSubmitCreateNewUser() {
-    this.createUser();
-  }
-
+ 
 
   // INSTALAR ICONS DE BOOSTRAPS
 

@@ -69,7 +69,7 @@ export class EditUsuarioComponent implements OnInit{
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       usuario: ['', [Validators.required]],
-      roles:['', [Validators.required]],
+      rol:['', [Validators.required]],
 
     });
   }
