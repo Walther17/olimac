@@ -20,10 +20,10 @@ public class Rol {
     @Column(name = "rol", nullable = false)
     private String rol;
 
- 
 
-    @ManyToOne
+
+    /* @ManyToOne
     @JoinColumn(name = "id_user")
-    private Usuario user;
+    private Usuario user; */
 
 }

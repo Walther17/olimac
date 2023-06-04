@@ -47,6 +47,7 @@ public class UsuarioImplementation implements UsuarioServices {
             userUpdate.setEstado(usuario.getEstado());
             userUpdate.setUsuario(usuario.getUsuario());
             userUpdate.setPassword(usuario.getPassword()); 
+            userUpdate.setRoles(usuario.getRoles());
     
             return usuarioRepository.save(userUpdate);
         } else {

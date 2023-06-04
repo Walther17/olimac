@@ -11,15 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  usuario: Usuario = {
-    id: 0,
-    nombre: '',
-    apellido: '',
-    usuario: '',
-    email: '',
-    estado: '',
-    password: '',
-  };
+  
+  usuarios: Usuario[] ;
+
 
   form: FormGroup;
 
@@ -32,17 +26,15 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-   createUser(event: Event){
-   event?.preventDefault();
-   if (this.form.valid) {
-    const user = this.form.value;
-    this.usuarioService.createUsuario(user).subscribe((newPromesa)=>{
-      console.log('This is the user: ', newPromesa);
-      this.goToListUsuarios();
+  createUser2(event: Event) {
+    event.preventDefault();
+    if (this.form.valid) {
+      const user = this.form.value;
+      this.usuarioService.createUsuario(user).subscribe((newUser) => {
+        console.log('This is the user: ', newUser);
+      });
+    }
 
-    });
-   }
-   
   }
 
   private buildForm() {
@@ -50,7 +42,6 @@ export class RegisterComponent implements OnInit {
     
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required, Validators.minLength(4), ]],
-      estado: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       usuario: ['', [Validators.required]],

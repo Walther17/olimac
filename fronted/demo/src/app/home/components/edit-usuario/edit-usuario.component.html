@@ -78,7 +78,7 @@
     </div>
   </section> -->
 
-  <section class="vh-100" style="background-color: #9A616D;">
+  <section  style="background-color: #9A616D;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
@@ -135,12 +135,11 @@
                       <div class="row">
                         <div class="col-md-6">
 
-                      <label for="exampleFormControlSelect1">Rol</label>
-                      <select class="form-control" formControlName="rol" id="rol" name="rol">
-                        <option *ngFor="let r of roles">{{r.rol}}</option>
-                      </select>
-                    </div>
-
+                          <label >Rol</label>
+                          <select class="form-control" formControlName="roles" id="roles" name="roles">
+                            <option  [value]="r.id" *ngFor="let r of roles">{{r.rol}}</option>
+                          </select>
+                        </div>
   
                       <div class="col-md-6">
 
